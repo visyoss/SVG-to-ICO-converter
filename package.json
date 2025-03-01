@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Convert SVG files to ICO format",
   "main": "src/batch-convert.js",
   "type": "module",
