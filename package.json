@@ -1,0 +1,27 @@
+{
+  "name": "svg2ico",
+  "version": "1.0.0",
+  "description": "svg to ico file",
+  "main": "batch-convert.js",
+  "keywords": [
+    "svg",
+    "ico",
+    "convert",
+    "ico generator",
+    "svg to ico",
+    "icon file"
+  ],
+  "bin": {
+    "svg2ico": "./batch-convert.js"
+  },
+  "scripts": {
+    "test": "start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.33.5",
+    "svg-to-ico": "^1.0.15"
+  }
+}
