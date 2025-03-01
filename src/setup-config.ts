@@ -4,13 +4,12 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import readline from 'readline';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 
-// Dynamically import the Shopify CLI Kit UI module
-async function loadShopifyUI() {
-    const { renderInfo, renderSuccess, renderWarning, renderError } = await import('@shopify/cli-kit/node/ui');
-    return { renderInfo, renderSuccess, renderWarning, renderError };
+interface Config {
+    inputFolder: string;
+    outputFolder: string;
+    pngSize: number;
+    useTimeout: boolean;
 }
 
 const configPath = path.join(os.homedir(), '.svg2ico-config.json');
@@ -20,20 +19,19 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-function askQuestion(query) {
+function askQuestion(query: string): Promise<string> {
     return new Promise(resolve => rl.question(query, resolve));
 }
 
-async function createConfig(overwrite = false) {
-    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
-    renderInfo(overwrite ? "Updating configuration file." : "Setting up configuration file.");
+async function createConfig(overwrite = false): Promise<void> {
+    console.log(overwrite ? "Updating configuration file." : "Setting up configuration file.");
     
     const inputFolder = await askQuestion("Enter the input folder path: ");
     const outputFolder = await askQuestion("Enter the output folder path: ");
     const pngSize = await askQuestion("Enter the default PNG size (e.g., 64 for 64x64): ");
     const useTimeout = await askQuestion("If you're not developing this project set to false all this does is slow the script down.(true/false): ");
     
-    const config = {
+    const config: Config = {
         inputFolder: inputFolder.trim() || "C:/path/to/default/input",
         outputFolder: outputFolder.trim() || "C:/path/to/default/output",
         pngSize: parseInt(pngSize.trim(), 10) || 256,
@@ -42,44 +40,54 @@ async function createConfig(overwrite = false) {
     
     if (overwrite) {
         fs.unlinkSync(configPath);
-        renderInfo("Existing configuration file removed.");
+        console.log("Existing configuration file removed.");
     }
     
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-    renderSuccess(`Configuration file created at ${configPath}`);
+    console.log(`Configuration file created at ${configPath}`);
     
     rl.close();
 }
 
-async function updateConfig() {
-    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
+async function updateConfig(): Promise<void> {
     if (fs.existsSync(configPath)) {
-        await createConfig(true);
+        const answer = await askQuestion('Configuration file already exists. Do you want to overwrite it? (yes/no): ');
+        if (answer.toLowerCase() === 'yes') {
+            await createConfig(true);
+        } else {
+            console.log('Aborting update.');
+            rl.close();
+        }
     } else {
-        renderWarning("No existing configuration file found. Creating a new one.");
         await createConfig();
     }
 }
 
-async function setPngSize() {
-    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
+async function setPngSize(): Promise<void> {
     const pngSize = await askQuestion("Enter the new default PNG size (e.g., 256 for 256x256): ");
-    const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath)) : {};
+    const config: Config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf-8')) : { inputFolder: '', outputFolder: '', pngSize: 256, useTimeout: false };
     config.pngSize = parseInt(pngSize.trim(), 10) || 256;
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-    renderSuccess(`PNG size updated to ${config.pngSize} in ${configPath}`);
+    console.log(`PNG size updated to ${config.pngSize} in ${configPath}`);
     rl.close();
 }
 
-(async () => {
-    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
+async function main() {
     if (process.argv.includes("--update")) {
-        updateConfig();
+        await updateConfig();
     } else if (process.argv.includes("--set-size")) {
-        setPngSize();
+        await setPngSize();
     } else if (!fs.existsSync(configPath)) {
-        createConfig();
+        await createConfig();
     } else {
-        renderInfo(`Configuration file already exists at ${configPath}`);
+        const answer = await askQuestion('Configuration file already exists. Do you want to overwrite it? (yes/no): ');
+        if (answer.toLowerCase() === 'yes') {
+            await createConfig(true);
+        } else {
+            console.log('Aborting setup.');
+            rl.close();
+        }
     }
-})();
+}
+
+main().catch(console.error);

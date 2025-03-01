@@ -2,8 +2,6 @@
   "name": "svg2ico",
   "version": "1.0.24",
   "description": "Convert SVG files to ICO format",
-  "main": "src/batch-convert.js",
-  "type": "module",
   "keywords": [
     "svg",
     "ico",
@@ -13,16 +11,17 @@
     "icon file"
   ],
   "bin": {
-    "svg2ico": "./src/batch-convert.js",
-    "svg2ico-setup": "./src/setup-config.js",
-    "svg2ico-update": "src/svg2ico-update.js",
-    "svg2ico-resize": "./src/resize-config.js"
+    "svg2ico": "dist/src/svg2ico.mjs",
+    "svg2ico-setup": "dist/src/setup-config.js",
+    "svg2ico-update": "dist/src/svg2ico-update.js",
+    "svg2ico-resize": "dist/src/resize-config.js"
   },
   "scripts": {
-    "setup": "node src/setup-config.js",
-    "update": "node src/setup-config.js --update",
-    "set-size": "node src/setup-config.js --set-size",
-    "resize": "node src/resize-config.js"
+    "build": "rimraf dist && tsc",
+    "setup": "node dist/src/setup-config.js",
+    "update": "node dist/src/setup-config.js --update",
+    "set-size": "node dist/src/setup-config.js --set-size",
+    "resize": "node dist/src/resize-config.js"
   },
   "author": "Ethan",
   "license": "MIT",
@@ -30,5 +29,10 @@
     "@shopify/cli-kit": "^3.76.0",
     "png-to-ico": "^2.1.8",
     "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }
