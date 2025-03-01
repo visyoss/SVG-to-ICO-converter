@@ -2,7 +2,8 @@
   "name": "svg2ico",
   "version": "1.0.14",
   "description": "Convert SVG files to ICO format",
-  "main": "src/batch-convert.js",
+  "main": "dist/batch-convert.js",
+  "type": "module",
   "keywords": [
     "svg",
     "ico",
@@ -12,16 +13,18 @@
     "icon file"
   ],
   "bin": {
-    "svg2ico": "./src/batch-convert.js",
-    "svg2ico-setup": "./src/setup-config.js",
-    "svg2ico-update": "src/svg2ico-update.js",
-    "svg2ico-resize": "./src/resize-config.js"
+    "svg2ico": "./dist/batch-convert.js",
+    "svg2ico-setup": "./dist/setup-config.js",
+    "svg2ico-update": "./dist/svg2ico-update.js",
+    "svg2ico-resize": "./dist/resize-config.js"
   },
   "scripts": {
     "setup": "node src/setup-config.js",
     "update": "node src/setup-config.js --update",
     "set-size": "node src/setup-config.js --set-size",
-    "resize": "node src/resize-config.js"
+    "resize": "node src/resize-config.js",
+    "prepare": "tsc",            
+    "prepublishOnly": "tsc"        
   },
   "author": "Ethan",
   "license": "MIT",
@@ -29,5 +32,9 @@
     "@shopify/cli-kit": "^3.76.0",
     "png-to-ico": "^2.1.8",
     "sharp": "^0.33.5"
-  }
+  },
+  "files": [
+    "dist/",
+    "README.md"
+  ]
 }
