@@ -36,8 +36,13 @@ async function loadShopifyUI() {
         fs.mkdirSync(outputFolder, { recursive: true });
     }
 
-    if (inputFolder) renderInfo(`Input folder: ${inputFolder}`);
-    if (outputFolder) renderInfo(`Output folder: ${outputFolder}`);
+    // Combine messages into a single info box
+    const message = [
+        inputFolder ? `Input folder: ${inputFolder}` : null,
+        outputFolder ? `Output folder: ${outputFolder}` : null
+    ].filter(Boolean).join('\n');
+
+    if (message) renderInfo(message);
 
     fs.readdir(inputFolder, async (err, files) => {
         if (err) {
