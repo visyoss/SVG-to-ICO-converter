@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Convert SVG files to ICO format",
   "main": "src/batch-convert.js",
   "type": "module",
@@ -30,5 +30,5 @@
     "@shopify/cli-kit": "^3.76.0",
     "png-to-ico": "^2.1.8",
     "sharp": "^0.33.5"
-  } 
+  }
 }
