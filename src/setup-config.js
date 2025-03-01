@@ -49,17 +49,19 @@ async function updateConfig() {
     }
 }
 
+async function setPngSize() {
+    const pngSize = await askQuestion("Enter the new default PNG size (e.g., 256 for 256x256): ");
+    const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath)) : {};
+    config.pngSize = parseInt(pngSize.trim(), 10) || 256;
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    console.log(`PNG size updated to ${config.pngSize} in ${configPath}`);
+    rl.close();
+}
+
 if (process.argv.includes("--update")) {
     updateConfig();
 } else if (process.argv.includes("--set-size")) {
-    (async () => {
-        const pngSize = await askQuestion("Enter the new default PNG size (e.g., 256 for 256x256): ");
-        const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath)) : {};
-        config.pngSize = parseInt(pngSize.trim(), 10) || 256;
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-        console.log(`PNG size updated to ${config.pngSize} in ${configPath}`);
-        rl.close();
-    })();
+    setPngSize();
 } else if (!fs.existsSync(configPath)) {
     createConfig();
 } else {

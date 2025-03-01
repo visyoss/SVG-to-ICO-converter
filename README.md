@@ -17,23 +17,23 @@ This tool maintains image quality by first converting SVGs to high-resolution PN
 
 ### Install globally (recommended)
 > [!IMPORTANT]
-> The setup command will prompt for SVG (Input Folder) & ICO (Output Folder) paths, always include the entire path (not relative) to insure the program can reach the folder('s).
+> During the setup always make sure you're using complete paths (not relative). The setup command is required if installing as a package, it creates a config file at your home directory ```Ex. /Users/yourname/.svg2ico-config.json```; this allows you to set default sizes and paths to folders. 
 ```bash
-npm install -g svg2ico && \npm run svg2ico-setup
-## The setup command is required to set default SVG and output ICO folders. 
+npm install -g svg2ico && svg2ico-setup
+## The setup command allows you to add paths & modify icon sizes by creating a config file at your home directory (eg. /Users/yourname). This is required since you're installing as a package.
 ```
-Now you can run `svg2ico` in your terminal. Your new ICO files will be at the path you put in the setup command.
+Now you can run `svg2ico` in your terminal. Your new ICO files will be at the path you defined in the setup command.
 >[!TIP] 
-> If you ever need to update the path's to folders run:
+> If you ever need to update path's or sizes run the command below and follow the prompt's:
 > ```Bash
-> npm run svg2ico-update
+> svg2ico-update
 > ```
 
 ### PNG sizing 
 
 The PNG size defines the size of the generated ICO file, you can update the size at any point with:
 ```bash
-npm run svg2ico-png-resize
+svg2ico-png-resize
 ```
 - This script will prompt you for a "px" size type so you're input should look similar to:
     - "16" = "16x16px"
