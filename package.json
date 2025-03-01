@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "svg to ico file",
   "main": "batch-convert.js",
   "keywords": [
@@ -17,11 +17,10 @@
   "scripts": {
     "test": "start"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ethan",
+  "license": "MIT",
   "dependencies": {
     "png-to-ico": "^2.1.8",
-    "sharp": "^0.33.5",
-    "svg-to-ico": "^1.0.15"
+    "sharp": "^0.33.5"
   }
 }
