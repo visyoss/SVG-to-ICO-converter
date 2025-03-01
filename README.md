@@ -15,73 +15,59 @@ This tool maintains image quality by first converting SVGs to high-resolution PN
 
 ## 🚀 Installation
 
-### Option 1: Install globally (recommended)
-
+### Install globally (recommended)
+> [!IMPORTANT]
+> The setup command will prompt for SVG (Input Folder) & ICO (Output Folder) paths, always include the entire path (not relative) to insure the program can reach the folder('s).
 ```bash
-npm install -g svg2ico
+npm install -g svg2ico && \npm run svg2ico-setup
+## The setup command is required to set default SVG and output ICO folders. 
 ```
+Now you can run `svg2ico` in your terminal. Your new ICO files will be at the path you put in the setup command.
+>[!TIP] 
+> If you ever need to update the path's to folders run:
+> ```Bash
+> npm run svg2ico-update
+> ```
 
-This makes the `svg2ico` command available system-wide.
+### PNG sizing 
 
-### Option 2: Clone the repository
-> [!NOTE]
-> NPM / Node is required this programs only been tested with [Node.js Version 20](https://nodejs.org/en/download).
-
+The PNG size defines the size of the generated ICO file, you can update the size at any point with:
 ```bash
-# Clone the repository
-git clone https://github.com/visyoss/SVG-to-ICO-converter.git 
-
-# Or with GitHub CLI
-gh repo clone visyoss/SVG-to-ICO-converter
-
-# Navigate to the project directory
-cd ~/SVG-to-ICO-converter
-
-# Install dependencies
-npm install
+npm run svg2ico-png-resize
 ```
-> [!NOTE]
-> To change the program / cloned repos folder name add a new name after the clone command 
-
-**Example**: ```git clone https://github.com/visyoss/SVG-to-ICO-converter.git svg2ico``` 
-- Replace svg2ico with desired name.
-
-## 🔧 Default path & PNG Config
-
-Modify the default folder in [batch-convert.js](./batch-convert.js) on line 9-10.
-
-```javascript
-// Default paths (edit these to match your systems locations)
-const DEFAULT_INPUT_FOLDER = "../Desktop/Design/icons";
-const DEFAULT_OUTPUT_FOLDER = "../Desktop/Design/converted-ico-files";
-```
-### Updating PNG sizing 
-To update default sizing modify this [File](./batch-convert.js). PNG sizing determines the .ico's file's size. 
-
-```javascript
-// line 42-44
-await sharp(inputPath)
-        .resize(256, 256) // Standard icon size
-        .png()
-```
+- This script will prompt you for a "px" size type so you're input should look similar to:
+    - "16" = "16x16px"
+    - "32" = "32x32"
+- After you've updated the sizing simply run the ```svg2ico``` command and program will automatically update all your ICO files. 
+> [!TIP]
+> Looking to only update sizes for one file or specific files? Add a new folder in you're SVG's main folder with the SVG's you intend to resize then run the command with [Path Override](#path-override)
 
 > [!TIP]
-> Use [This Guide](https://github.com/visyoss/Assets/blob/2471b7675648816ad40acb568ea593f967540926/cheat-sheet's/icon-sizing.md) for a list of web based Icon size defaults.
+> Use [This Guide](https://github.com/visyoss/Assets/blob/2471b7675648816ad40acb568ea593f967540926/cheat-sheet's/icon-sizing.md) for a cheat-sheet on Web based Icons.
 
 ## 💻 Command Line Use
+### Setup
+> [!TIP]
+> Setup default folder locations by running:
+> ```Bash
+> npm run svg2ico-setup
+> ```
+<!-- > 3. If the output folder doesn't exist the program will create a folder with the name you include. -->
+### Path override
+Path overrides can be useful by allowing you to create separate folders from your default, like if you wanted specific icons to be a specific size but don't want to modify all your SVG / ICO files.
 
-### You can override the default folder's with:
 ```bash
 svg2ico [SVG-folder] [Converted-ICO-folder]
 ```
-### Using set folder locations: 
+> [!TIP]
+> When running the command you wont include brackets.
+> 1. **Example:** ```svg2ico /your/path/folder-with-svg-files /your/path/folder-for-new-ico-files```
+### After using setup command to set folder locations: 
 
 ```bash
 svg2ico
 ```
-> [!TIP] 
-> Update the [Conversion file](./batch-convert.js). To match your systems SVG & converted ICO folder locations.
-[More Info📎](#-default-path--png-config)
+
 #### Parameters:
 
 | Parameter | Description | Default Value |
@@ -91,9 +77,9 @@ svg2ico
 
 ### Desktop Shortcut (Optional)
 > [!NOTE]
-> This is only available on windows.
+> This is only available on windows. [Linux Example](#linux-setup)
 
-This repository includes a [batch file](batch-convert.js). This makes it possible to run the converter from a button (Shortcut) on your desktop.
+This repository includes a [bat file](./src/run-svg2ico.bat). Which makes it possible to run the converter from a button (Shortcut) on your desktop.
 
 ## Creating the shortcut:
 
@@ -106,7 +92,8 @@ This repository includes a [batch file](batch-convert.js). This makes it possibl
 > The path to ```run-svg2ico.bat``` is in the projects root folder I.E ```~/SVG-to-ICO-converter/run-svg2ico.bat```
 
 Now you can run the converter with a single click from your desktop!
-## Linux setup
+
+## Linux setup (Optional)
 The setup to get this program working is the same as Windows. Shortcuts aren't available that I know of but you can create something very similar by:
 
 > Creating an alias for the program
@@ -137,13 +124,13 @@ alias svg2ico='path/to/convert/file/batch-convert.js'
     > Version (2.1.8)
 - [png-to-ico](https://www.npmjs.com/package/png-to-ico) - Handles PNG to ICO conversion.
     > Version (0.33.5)
+
 ## 🔍 Troubleshooting:
 
 - **Error: Cannot find module '*Package Name*'**: Run `npm install` in the project directory / root.
 - **Permission errors**: Run with administrator privileges or adjust folder permissions
 - **Output folder not found**: The tool will attempt to create the output folder if it doesn't exist.
 - **Error: Input file contains unsupported image format**: Usually the cause of this is a malformed SVG, you can troubleshoot this in VS Code with an extension like [SVG syntax / preview](https://marketplace.visualstudio.com/items?itemName=jock.svg).
-
 
 > [!NOTE]
 > If you encounter an error not listed here, create an issue [here](https://github.com/visyoss/SVG-to-ICO-converter/issues/new/choose). If you find the solution please add that (or create a contribution).

@@ -2,3 +2,4 @@ node_modules/
 internal/
 extras/
 .vscode/
+cspell.config.yaml
