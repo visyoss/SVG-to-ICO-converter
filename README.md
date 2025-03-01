@@ -33,7 +33,7 @@ Now you can run `svg2ico` in your terminal. Your new ICO files will be at the pa
 
 The PNG size defines the size of the generated ICO file, you can update the size at any point with:
 ```bash
-svg2ico-png-resize
+svg2ico-resize
 ```
 - This script will prompt you for a "px" size type so you're input should look similar to:
     - "16" = "16x16px"

@@ -21,7 +21,7 @@ async function createConfig(overwrite = false) {
     
     const inputFolder = await askQuestion("Enter the input folder path: ");
     const outputFolder = await askQuestion("Enter the output folder path: ");
-    const pngSize = await askQuestion("Enter the default PNG size (e.g., 256 for 256x256): ");
+    const pngSize = await askQuestion("Enter the default PNG size (e.g., 64 for 64x64): ");
     
     const config = {
         inputFolder: inputFolder.trim() || "C:/path/to/default/input",
