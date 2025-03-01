@@ -13,16 +13,16 @@
     "icon file"
   ],
   "bin": {
-    "svg2ico": "./dist/batch-convert.js",
-    "svg2ico-setup": "./dist/setup-config.js",
-    "svg2ico-update": "./dist/svg2ico-update.js",
-    "svg2ico-resize": "./dist/resize-config.js"
+    "svg2ico": "./dist/batch-convert.mjs",
+    "svg2ico-setup": "./dist/setup-config.mjs",
+    "svg2ico-update": "./dist/svg2ico-update.mjs",
+    "svg2ico-resize": "./dist/resize-config.mjs"
   },
   "scripts": {
-    "setup": "node src/setup-config.js",
-    "update": "node src/setup-config.js --update",
-    "set-size": "node src/setup-config.js --set-size",
-    "resize": "node src/resize-config.js",
+    "setup": "node src/setup-config.mjs",
+    "update": "node src/setup-config.mjs --update",
+    "set-size": "node src/setup-config.mjs --set-size",
+    "resize": "node src/resize-config.mjs",
     "prepare": "tsc",
     "prepublishOnly": "tsc"
   },
