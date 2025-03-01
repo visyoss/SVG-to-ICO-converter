@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const sharp = require('sharp');
-const pngToIco = require('png-to-ico');
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import sharp from 'sharp';
+import pngToIco from 'png-to-ico';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 // Dynamically import the Shopify CLI Kit UI module
 async function loadShopifyUI() {
