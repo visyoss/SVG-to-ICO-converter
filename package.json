@@ -23,8 +23,6 @@
     "set-size": "node dist/src/setup-config.js --set-size",
     "resize": "node dist/src/resize-config.js"
   },
-  "author": "Ethan",
-  "license": "MIT",
   "dependencies": {
     "@shopify/cli-kit": "^3.76.0",
     "png-to-ico": "^2.1.8",
@@ -35,5 +33,11 @@
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/visyoss/SVG-to-ICO-converter/issues"
+  },
+  "homepage": "https://github.com/visyoss/SVG-to-ICO-converter#readme",
+  "author": "Ethan",
+  "readme": "README.npm.md"
 }

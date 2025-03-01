@@ -4,3 +4,4 @@ node_modules/*
 .vscode/*
 cspell.config.yaml
 config.json
+node_modules
