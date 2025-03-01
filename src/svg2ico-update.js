@@ -4,6 +4,14 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import readline from 'readline';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+// Dynamically import the Shopify CLI Kit UI module
+async function loadShopifyUI() {
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await import('@shopify/cli-kit/node/ui');
+    return { renderInfo, renderSuccess, renderWarning, renderError };
+}
 
 // Path to the configuration file
 const configPath = path.join(os.homedir(), '.svg2ico-config.json');
@@ -18,11 +26,13 @@ const askQuestion = (query) => new Promise(resolve => rl.question(query, resolve
 
 // Main function to update the configuration
 async function updateConfig() {
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
+
     if (fs.existsSync(configPath)) {
-        console.log(`Configuration file already exists at ${configPath}.`);
+        renderInfo(`Configuration file already exists at ${configPath}.`);
         const answer = await askQuestion('Do you want to overwrite it? (yes/no): ');
         if (answer.toLowerCase() !== 'yes') {
-            console.log('Aborting update.');
+            renderWarning('Aborting update.');
             rl.close();
             return;
         }
@@ -40,7 +50,7 @@ async function updateConfig() {
     };
 
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-    console.log(`Configuration updated successfully at ${configPath}.`);
+    renderSuccess(`Configuration updated successfully at ${configPath}.`);
 
     rl.close();
 }

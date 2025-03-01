@@ -4,6 +4,14 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import readline from 'readline';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+// Dynamically import the Shopify CLI Kit UI module
+async function loadShopifyUI() {
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await import('@shopify/cli-kit/node/ui');
+    return { renderInfo, renderSuccess, renderWarning, renderError };
+}
 
 const configPath = path.join(os.homedir(), '.svg2ico-config.json');
 
@@ -17,7 +25,8 @@ function askQuestion(query) {
 }
 
 async function createConfig(overwrite = false) {
-    console.log(overwrite ? "Updating configuration file." : "Setting up configuration file.");
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
+    renderInfo(overwrite ? "Updating configuration file." : "Setting up configuration file.");
     
     const inputFolder = await askQuestion("Enter the input folder path: ");
     const outputFolder = await askQuestion("Enter the output folder path: ");
@@ -33,39 +42,44 @@ async function createConfig(overwrite = false) {
     
     if (overwrite) {
         fs.unlinkSync(configPath);
-        console.log("Existing configuration file removed.");
+        renderInfo("Existing configuration file removed.");
     }
     
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-    console.log(`Configuration file created at ${configPath}`);
+    renderSuccess(`Configuration file created at ${configPath}`);
     
     rl.close();
 }
 
 async function updateConfig() {
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
     if (fs.existsSync(configPath)) {
         await createConfig(true);
     } else {
-        console.log("No existing configuration file found. Creating a new one.");
+        renderWarning("No existing configuration file found. Creating a new one.");
         await createConfig();
     }
 }
 
 async function setPngSize() {
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
     const pngSize = await askQuestion("Enter the new default PNG size (e.g., 256 for 256x256): ");
     const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath)) : {};
     config.pngSize = parseInt(pngSize.trim(), 10) || 256;
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-    console.log(`PNG size updated to ${config.pngSize} in ${configPath}`);
+    renderSuccess(`PNG size updated to ${config.pngSize} in ${configPath}`);
     rl.close();
 }
 
-if (process.argv.includes("--update")) {
-    updateConfig();
-} else if (process.argv.includes("--set-size")) {
-    setPngSize();
-} else if (!fs.existsSync(configPath)) {
-    createConfig();
-} else {
-    console.log(`Configuration file already exists at ${configPath}`);
-}
+(async () => {
+    const { renderInfo, renderSuccess, renderWarning, renderError } = await loadShopifyUI();
+    if (process.argv.includes("--update")) {
+        updateConfig();
+    } else if (process.argv.includes("--set-size")) {
+        setPngSize();
+    } else if (!fs.existsSync(configPath)) {
+        createConfig();
+    } else {
+        renderInfo(`Configuration file already exists at ${configPath}`);
+    }
+})();
