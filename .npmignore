@@ -1,0 +1,6 @@
+extras/*
+internal/*
+node_modules/*
+.vscode/*
+cspell.config.yaml
+config.json

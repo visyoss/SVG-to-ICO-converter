@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "svg to ico file",
   "main": "batch-convert.js",
   "keywords": [
@@ -12,12 +12,15 @@
     "icon file"
   ],
   "bin": {
-    "svg2ico": "./src/batch-convert.js"
+    "svg2ico": "src/batch-convert.js",
+    "svg2ico-setup": "src/setup-config.js",
+    "svg2ico-update": "src/setup-config.js --update",
+    "svg2ico-png-resize": "src/setup-config.js --set-size"
   },
   "scripts": {
     "svg2ico-setup": "node src/setup-config.js",
-    "svg2ico-update": "node ./src/setup-config.js --update",
-    "svg2ico-png-resize": "node ./src/setup-config.js --set-size"
+    "svg2ico-update": "node src/setup-config.js --update",
+    "svg2ico-png-resize": "node src/setup-config.js --set-size"
   },
   "author": "Ethan",
   "license": "MIT",
