@@ -14,7 +14,7 @@
   "bin": {
     "svg2ico": "./src/batch-convert.js",
     "svg2ico-setup": "./src/setup-config.js",
-    "svg2ico-update": "./src/setup-config.js",
+    "svg2ico-update": "src/svg2ico-update.js",
     "svg2ico-png-resize": "./src/setup-config.js"
   },
   "scripts": {
