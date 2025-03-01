@@ -39,5 +39,6 @@
   },
   "homepage": "https://github.com/visyoss/SVG-to-ICO-converter#readme",
   "author": "Ethan",
+  "license": "MIT",
   "readme": "README.npm.md"
 }

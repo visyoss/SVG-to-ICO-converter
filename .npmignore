@@ -5,3 +5,4 @@ node_modules/*
 cspell.config.yaml
 config.json
 node_modules
+.cspell
