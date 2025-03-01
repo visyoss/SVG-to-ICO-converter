@@ -22,11 +22,13 @@ async function createConfig(overwrite = false) {
     const inputFolder = await askQuestion("Enter the input folder path: ");
     const outputFolder = await askQuestion("Enter the output folder path: ");
     const pngSize = await askQuestion("Enter the default PNG size (e.g., 64 for 64x64): ");
+    const useTimeout = await askQuestion("If you're not developing this project set to false all this does is slow the script down.(true/false): ");
     
     const config = {
         inputFolder: inputFolder.trim() || "C:/path/to/default/input",
         outputFolder: outputFolder.trim() || "C:/path/to/default/output",
-        pngSize: parseInt(pngSize.trim(), 10) || 256
+        pngSize: parseInt(pngSize.trim(), 10) || 256,
+        useTimeout: useTimeout.trim().toLowerCase() === 'true'
     };
     
     if (overwrite) {

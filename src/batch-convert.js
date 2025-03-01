@@ -29,6 +29,7 @@ async function loadShopifyUI() {
     const inputFolder = args[0] ? path.resolve(args[0]) : path.resolve(config.inputFolder || path.join(__dirname, '../../Desktop/Design/all-icons'));
     const outputFolder = args[1] ? path.resolve(args[1]) : path.resolve(config.outputFolder || path.join(__dirname, '../Desktop/Design/conv-ico'));
     const pngSize = config.pngSize || 256; // Read PNG size from config, default to 256
+    const useTimeout = config.useTimeout || false; // Read useTimeout from config, default to false
 
     // Ensure output folder exists
     if (!fs.existsSync(outputFolder)) {
@@ -67,8 +68,10 @@ async function loadShopifyUI() {
                         .png()
                         .toFile(pngTemp);
 
-                    // Introduce a 3-second pause for testing
-                    await new Promise(resolve => setTimeout(resolve, 3000));
+                    // Conditionally apply the timeout for testing
+                    if (useTimeout) {
+                        await new Promise(resolve => setTimeout(resolve, 3000));
+                    }
 
                     // Then convert PNG to ICO using png-to-ico
                     const icoBuffer = await pngToIco([pngTemp]);
