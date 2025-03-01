@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const readline = require('readline');
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import readline from 'readline';
 
 // Path to the configuration file
 const configPath = path.join(os.homedir(), '.svg2ico-config.json');
