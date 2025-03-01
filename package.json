@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Convert SVG files to ICO format",
   "main": "dist/batch-convert.js",
   "type": "module",
@@ -23,8 +23,8 @@
     "update": "node src/setup-config.js --update",
     "set-size": "node src/setup-config.js --set-size",
     "resize": "node src/resize-config.js",
-    "prepare": "tsc",            
-    "prepublishOnly": "tsc"        
+    "prepare": "tsc",
+    "prepublishOnly": "tsc"
   },
   "author": "Ethan",
   "license": "MIT",
