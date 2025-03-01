@@ -15,12 +15,13 @@
     "svg2ico": "./src/batch-convert.js",
     "svg2ico-setup": "./src/setup-config.js",
     "svg2ico-update": "src/svg2ico-update.js",
-    "svg2ico-resize": "./src/setup-config.js --set-size"
+    "svg2ico-resize": "./src/resize-config.js"
   },
   "scripts": {
     "setup": "node src/setup-config.js",
     "update": "node src/setup-config.js --update",
-    "set-size": "node src/setup-config.js --set-size"
+    "set-size": "node src/setup-config.js --set-size",
+    "resize": "node src/resize-config.js"
   },
   "author": "Ethan",
   "license": "MIT",
