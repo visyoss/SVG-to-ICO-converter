@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "Convert SVG files to ICO format",
   "keywords": [
     "svg",
@@ -26,8 +26,7 @@
   "dependencies": {
     "@shopify/cli-kit": "^3.76.0",
     "png-to-ico": "^2.1.8",
-    "sharp": "^0.33.5",
-    "prepublishOnly": "npm run build"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "rimraf": "^6.0.1",
