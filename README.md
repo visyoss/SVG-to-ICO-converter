@@ -9,7 +9,11 @@
 👨‍💻 Author: <a href="https://github.com/visyoss">Ethan</a> |
 📄 License: <a href="https://github.com/visyoss/svg2ico/blob/bd6c01f8e35ffbed2f17155b014302201caee884/LICENSE">MIT</a> | 
 <a href="mailto:dev@webflok.com">
-  <img src="icons/email.svg" alt="Send us a message" width="18" height="18"> Email
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="icons/email.svg">
+    <source media="(prefers-color-scheme: light)" srcset="icons/email-light.svg">
+    <img alt="Contact us" src="icons/email-light.svg">
+    </picture>Email
 </a>
 </h4>
 
