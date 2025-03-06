@@ -1,6 +1,6 @@
 {
   "name": "svg2ico",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "description": "Convert SVG files to ICO format",
   "keywords": [
     "svg",
