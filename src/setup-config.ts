@@ -29,7 +29,7 @@ async function createConfig(overwrite = false): Promise<void> {
     const inputFolder = await askQuestion("Enter the input folder path: ");
     const outputFolder = await askQuestion("Enter the output folder path: ");
     const pngSize = await askQuestion("Enter the default PNG size (e.g., 64 for 64x64): ");
-    const useTimeout = await askQuestion("If you're not developing this project set to false all this does is slow the script down.(true/false): ");
+    const useTimeout = await askQuestion("dev mode (slows the conversater).(true/false): ");
     
     const config: Config = {
         inputFolder: inputFolder.trim() || "C:/path/to/default/input",
