@@ -1,24 +1,17 @@
-<a align="center"> 
-    <p align="center">
-  <picture>
-    <img alt="SVG to ICO file converter" src="https://github.com/user-attachments/assets/bf262cfd-5131-441b-8c66-9f78c53aa73a">
-    </picture>
-  </a>
-</p>
+
+<p align="center">
+  <img src="icons/svg2ico.svg" alt="Send us a message" width="115" height="115"> 
+    </p>
     <h2 align="center">
     SVG2ICO</h2>
 
 <h4 align="center"> 
 👨‍💻 Author: <a href="https://github.com/visyoss">Ethan</a> |
-📄 License: <a href="https://github.com/visyoss/svg2ico/blob/bd6c01f8e35ffbed2f17155b014302201caee884/LICENSE">MIT</a> |
-📧 Email: <a href="mailto:dev@webflok.com">dev@webflok.com</a>
+📄 License: <a href="https://github.com/visyoss/svg2ico/blob/bd6c01f8e35ffbed2f17155b014302201caee884/LICENSE">MIT</a> | 
+<a href="mailto:dev@webflok.com">
+  <img src="icons/email.svg" alt="Send us a message" width="18" height="18"> Email
+</a>
 </h4>
-</h4>
-<p align="center">
-  The simplest command-line tool to convert SVG files to ICO format.
-  (Windows icon / Favicon) format.
-</p>
-
 
 ---
 
