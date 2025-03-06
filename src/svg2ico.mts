@@ -34,7 +34,7 @@ interface Config {
   const outputFolder = args[1]
     ? path.resolve(args[1])
     : path.resolve(config.outputFolder || path.join(__dirname, '../Desktop/Design/conv-ico'));
-  const pngSize = config.pngSize || 256; // Default PNG size
+  const pngSize = config.pngSize || 64; // Default PNG size
 
   // Ensure output folder exists
   if (!fs.existsSync(outputFolder)) {
@@ -71,7 +71,7 @@ interface Config {
             .toFile(pngTemp);
 
           // Introduce a 3-second pause (for testing)
-          await new Promise((resolve) => setTimeout(resolve, 3000));
+          // await new Promise((resolve) => setTimeout(resolve, 3000));
 
           // Convert PNG to ICO using png-to-ico
           const icoBuffer: Buffer = await pngToIco([pngTemp]);
